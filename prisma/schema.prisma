@@ -1,0 +1,309 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum RoleType {
+  SUPER_ADMIN
+  ORG_ADMIN
+  MEMBER
+  GUEST
+}
+
+enum Severity {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum Status {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+model User {
+  id             String         @id @default(uuid())
+  email          String         @unique
+  username       String?
+  avatarUrl      String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  deletedAt      DateTime?
+
+  organizationId String?
+  organization   Organization?  @relation(fields: [organizationId], references: [id])
+  sessions       Session[]
+  auditLogs      AuditLog[]
+
+  @@index([email])
+}
+
+model Organization {
+  id             String         @id @default(uuid())
+  name           String
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  deletedAt      DateTime?
+
+  users          User[]
+  workspaces     Workspace[]
+  subscriptions  Subscription[]
+  invoices       Invoice[]
+}
+
+model Workspace {
+  id             String         @id @default(uuid())
+  name           String
+  organizationId String
+  organization   Organization   @relation(fields: [organizationId], references: [id])
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  deletedAt      DateTime?
+
+  apiKeys        ApiKey[]
+  chats          AiChat[]
+  agents         AiAgent[]
+  knowledgeBases KnowledgeBase[]
+  workflows      Workflow[]
+  whatsappAccts  WhatsAppAccount[]
+  contacts       CrmContact[]
+  folders        Folder[]
+  orders         Order[]
+  notifications  Notification[]
+  settings       Setting[]
+
+  @@index([organizationId])
+}
+
+model Session {
+  id             String         @id @default(uuid())
+  userId         String
+  user           User           @relation(fields: [userId], references: [id])
+  token          String         @unique
+  expiresAt      DateTime
+  createdAt      DateTime       @default(now())
+
+  @@index([userId])
+}
+
+model ApiKey {
+  id             String         @id @default(uuid())
+  workspaceId    String
+  workspace      Workspace      @relation(fields: [workspaceId], references: [id])
+  name           String
+  secretValue    String         @unique
+  scopes         String[]
+  expiresAt      DateTime?
+  createdAt      DateTime       @default(now())
+
+  @@index([workspaceId])
+}
+
+model AiChat {
+  id             String         @id @default(uuid())
+  workspaceId    String
+  workspace      Workspace      @relation(fields: [workspaceId], references: [id])
+  title          String
+  createdAt      DateTime       @default(now())
+  messages       AiMessage[]
+
+  @@index([workspaceId])
+}
+
+model AiMessage {
+  id             String         @id @default(uuid())
+  chatId         String
+  chat           AiChat         @relation(fields: [chatId], references: [id])
+  role           String
+  content        String
+  createdAt      DateTime       @default(now())
+
+  @@index([chatId])
+}
+
+model AiAgent {
+  id             String         @id @default(uuid())
+  workspaceId    String
+  workspace      Workspace      @relation(fields: [workspaceId], references: [id])
+  name           String
+  modelName      String
+  temperature    Float          @default(0.7)
+  createdAt      DateTime       @default(now())
+
+  @@index([workspaceId])
+}
+
+model KnowledgeBase {
+  id             String         @id @default(uuid())
+  workspaceId    String
+  workspace      Workspace      @relation(fields: [workspaceId], references: [id])
+  name           String
+  createdAt      DateTime       @default(now())
+  documents      Document[]
+
+  @@index([workspaceId])
+}
+
+model Document {
+  id              String        @id @default(uuid())
+  knowledgeBaseId String
+  knowledgeBase   KnowledgeBase @relation(fields: [knowledgeBaseId], references: [id])
+  title           String
+  content         String
+  createdAt       DateTime      @default(now())
+
+  @@index([knowledgeBaseId])
+}
+
+model Workflow {
+  id             String         @id @default(uuid())
+  workspaceId    String
+  workspace      Workspace      @relation(fields: [workspaceId], references: [id])
+  name           String
+  isActive       Boolean        @default(true)
+  createdAt      DateTime       @default(now())
+  executions     WorkflowExecution[]
+
+  @@index([workspaceId])
+}
+
+model WorkflowExecution {
+  id             String         @id @default(uuid())
+  workflowId     String
+  workflow       Workflow       @relation(fields: [workflowId], references: [id])
+  status         String
+  startedAt      DateTime       @default(now())
+  completedAt    DateTime?
+
+  @@index([workflowId])
+}
+
+model WhatsAppAccount {
+  id             String         @id @default(uuid())
+  workspaceId    String
+  workspace      Workspace      @relation(fields: [workspaceId], references: [id])
+  phoneNumber    String         @unique
+  createdAt      DateTime       @default(now())
+  messages       WhatsAppMessage[]
+
+  @@index([workspaceId])
+}
+
+model WhatsAppMessage {
+  id             String         @id @default(uuid())
+  accountId      String
+  account        WhatsAppAccount @relation(fields: [accountId], references: [id])
+  direction      String
+  body           String
+  createdAt      DateTime       @default(now())
+
+  @@index([accountId])
+}
+
+model CrmContact {
+  id             String         @id @default(uuid())
+  workspaceId    String
+  workspace      Workspace      @relation(fields: [workspaceId], references: [id])
+  name           String
+  email          String?
+  createdAt      DateTime       @default(now())
+
+  @@index([workspaceId])
+}
+
+model Folder {
+  id             String         @id @default(uuid())
+  workspaceId    String
+  workspace      Workspace      @relation(fields: [workspaceId], references: [id])
+  name           String
+  createdAt      DateTime       @default(now())
+  files          File[]
+
+  @@index([workspaceId])
+}
+
+model File {
+  id             String         @id @default(uuid())
+  folderId       String
+  folder         Folder         @relation(fields: [folderId], references: [id])
+  name           String
+  url            String
+  sizeBytes      Int
+  createdAt      DateTime       @default(now())
+
+  @@index([folderId])
+}
+
+model Order {
+  id             String         @id @default(uuid())
+  workspaceId    String
+  workspace      Workspace      @relation(fields: [workspaceId], references: [id])
+  amount         Int
+  currency       String
+  createdAt      DateTime       @default(now())
+
+  @@index([workspaceId])
+}
+
+model Subscription {
+  id             String         @id @default(uuid())
+  organizationId String
+  organization   Organization   @relation(fields: [organizationId], references: [id])
+  planTier       String
+  status         String
+  expiresAt      DateTime
+  createdAt      DateTime       @default(now())
+
+  @@index([organizationId])
+}
+
+model Invoice {
+  id             String         @id @default(uuid())
+  organizationId String
+  organization   Organization   @relation(fields: [organizationId], references: [id])
+  amount         Int
+  status         String
+  createdAt      DateTime       @default(now())
+
+  @@index([organizationId])
+}
+
+model Notification {
+  id             String         @id @default(uuid())
+  workspaceId    String
+  workspace      Workspace      @relation(fields: [workspaceId], references: [id])
+  title          String
+  body           String
+  isRead         Boolean        @default(false)
+  createdAt      DateTime       @default(now())
+
+  @@index([workspaceId])
+}
+
+model AuditLog {
+  id             String         @id @default(uuid())
+  userId         String
+  user           User           @relation(fields: [userId], references: [id])
+  action         String
+  timestamp      DateTime       @default(now())
+
+  @@index([userId])
+}
+
+model Setting {
+  id             String         @id @default(uuid())
+  workspaceId    String
+  workspace      Workspace      @relation(fields: [workspaceId], references: [id])
+  key            String
+  value          String
+  createdAt      DateTime       @default(now())
+
+  @@index([workspaceId])
+}
