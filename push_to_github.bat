@@ -4,6 +4,9 @@ echo ===================================================
 echo [1/5] Initializing Git repository...
 echo ===================================================
 git init
+git config http.postBuffer 524288000
+git config http.lowSpeedLimit 0
+git config http.lowSpeedTime 999999
 
 echo ===================================================
 echo [2/5] Staging files...
