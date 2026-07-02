@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # 1. PHP/Apache Web App Container
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: expendmore_web
+    ports:
+      - "8080:80"
+    environment:
+      - APP_ENV=production
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=expendmore
+      - DB_USERNAME=expendmore_user
+      - DB_PASSWORD=expendmore_secure_password
+      - SESSION_TIMEOUT=900
+      - COOKIE_SECURE=1
+      - COOKIE_HTTPONLY=1
+      - COOKIE_SAMESITE=Lax
+    depends_on:
+      - db
+    volumes:
+      - web_logs:/var/log/apache2
+    restart: always
+
+  # 2. Database Backend Container
+  db:
+    image: mysql:8.0
+    container_name: expendmore_db
+    environment:
+      - MYSQL_DATABASE=expendmore
+      - MYSQL_USER=expendmore_user
+      - MYSQL_PASSWORD=expendmore_secure_password
+      - MYSQL_ROOT_PASSWORD=expendmore_root_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./auth_core/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./auth_core/schema_v3.sql:/docker-entrypoint-initdb.d/2-schema_v3.sql
+      - ./auth_core/schema_v4.sql:/docker-entrypoint-initdb.d/3-schema_v4.sql
+      - ./auth_core/schema_v5.sql:/docker-entrypoint-initdb.d/4-schema_v5.sql
+    restart: always
+
+volumes:
+  web_logs:
+  db_data:

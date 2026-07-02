@@ -1,0 +1,45 @@
+name: Production Build & CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  # 1. Audit & Lint checks
+  lint-and-test:
+    name: Codebase Audit & Check rules
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP Environment
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo, pdo_mysql, curl, openssl, session
+
+      - name: Check PHP Syntax (Linter)
+        run: |
+          find . -name "*.php" -not -path "*/vendor/*" -exec php -l {} \;
+
+  # 2. Build Docker Images
+  docker-build:
+    name: Build & Push Release Images
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build local container image
+        run: |
+          docker build -t expendmore/auth:latest -f Dockerfile .

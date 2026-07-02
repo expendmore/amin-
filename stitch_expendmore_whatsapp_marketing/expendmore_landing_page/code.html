@@ -1,0 +1,345 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ExpendMore - Automate Your WhatsApp Marketing</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700;800&amp;family=Inter:wght@400;500&amp;family=Geist:wght@500;600&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#3de273",
+                        "tertiary-container": "#63c9b9",
+                        "secondary-fixed": "#9cf0ff",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary-fixed": "#002109",
+                        "tertiary": "#80e5d5",
+                        "error": "#ffb4ab",
+                        "secondary-fixed-dim": "#00daf3",
+                        "on-tertiary-container": "#005249",
+                        "surface-bright": "#3a3939",
+                        "primary": "#4ff07f",
+                        "surface-variant": "#353534",
+                        "tertiary-fixed": "#8ff4e3",
+                        "surface-container-high": "#2a2a2a",
+                        "on-secondary-container": "#00616d",
+                        "primary-container": "#25d366",
+                        "on-secondary-fixed": "#001f24",
+                        "on-surface-variant": "#bbcbb9",
+                        "inverse-primary": "#006d2f",
+                        "secondary-container": "#00e3fd",
+                        "surface-container": "#201f1f",
+                        "on-secondary-fixed-variant": "#004f58",
+                        "surface-container-low": "#1c1b1b",
+                        "error-container": "#93000a",
+                        "inverse-surface": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#005047",
+                        "on-primary": "#003915",
+                        "tertiary-fixed-dim": "#72d8c8",
+                        "on-surface": "#e5e2e1",
+                        "on-secondary": "#00363d",
+                        "on-primary-container": "#005523",
+                        "background": "#0A0A0A",
+                        "on-background": "#e5e2e1",
+                        "on-tertiary-fixed": "#00201c",
+                        "outline-variant": "#3c4a3d",
+                        "secondary": "#bdf4ff",
+                        "inverse-on-surface": "#313030",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#005322",
+                        "surface-tint": "#3de273",
+                        "surface-container-highest": "#353534",
+                        "primary-fixed": "#66ff8e",
+                        "outline": "#869584",
+                        "surface": "#131313",
+                        "on-tertiary": "#003731",
+                        "surface-dim": "#131313"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "lg": "48px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "md": "24px",
+                        "xl": "80px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "label-xs": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "display": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-xs": ["10px", {"lineHeight": "14px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(22, 22, 22, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid #2A2A2A;
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: #3de273;
+            transform: translateY(-4px);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 50%, rgba(37, 211, 102, 0.15) 0%, transparent 70%);
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #25D366 0%, #00e3fd 100%);
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .btn-primary:active {
+            transform: scale(0.95);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+<!-- TopAppBar -->
+<nav class="flex justify-between items-center w-full px-margin-desktop h-16 sticky top-0 z-50 bg-background/80 backdrop-blur-xl dark:bg-background/80 border-b border-outline-variant">
+<div class="flex items-center gap-base">
+<img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXX1DCQG8F09cfFGj6cNc74SiIzvhKlPuZ4DutMnLAZ1WwEr1_36Bq5V3rqx-3uLHDVeTemvJMZVol4mcWWp2v9MTj2o8OnNdTGqwOEVI8pCfuxe9XMoDgQ_YSPrAF3jNJO6rk9bNvj6cHhjY6shaIm4G9qa3qUoqIySXRR8FYo8XnQfSzk4gbBSsa3rHo5v0Ko2cs1RUpUyg2Ctx7ZQZsJmgvipi1TaV_MHArxTcgDRiBt27-TGkLEQudUI6bWo6T" alt="ExpendMore Logo" class="h-8 w-auto">
+</div>
+<div class="hidden md:flex items-center gap-lg">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 text-label-sm font-label-sm" href="#">Automation</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-fixed-dim transition-colors duration-200 text-label-sm font-label-sm" href="#">Engagement</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-fixed-dim transition-colors duration-200 text-label-sm font-label-sm" href="#">Expansion</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-fixed-dim transition-colors duration-200 text-label-sm font-label-sm" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden lg:flex items-center gap-xs text-on-surface-variant text-label-sm font-label-sm mr-4">
+<span class="opacity-70">Balance:</span>
+<span class="text-primary font-bold">1,250</span>
+</div>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-lg font-bold text-label-sm hover:opacity-90 transition-all active:scale-95">
+                Buy Coins
+            </button>
+<div class="flex items-center gap-sm">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">settings</button>
+</div>
+</div>
+</nav>
+<main class="relative">
+<!-- Hero Section -->
+<section class="hero-gradient relative min-h-[90vh] flex flex-col items-center justify-center text-center px-margin-mobile md:px-margin-desktop py-xl overflow-hidden">
+<div class="absolute inset-0 z-0">
+
+</div>
+<div class="relative z-10 max-w-5xl mx-auto space-y-md">
+<div class="flex justify-center mb-base">
+<img alt="ExpendMore Logo" class="h-32 md:h-48 drop-shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdSL_VzsGDUpkRQS2gLpPz4l2EV5vt6iuK9fB2fgNOwaBhfJGnq0SavbWj0w667UTg862DoNlUxGOsDgZQWiU8iEpyUtoTpkho0NBV9CPDrGTx5UcSTqSvxm1afL_Ut-m6lZUKRB7MuGDlmVnB1XHziJi8ToXkoBILoShLFmOTsoMMspb7E9Xc9IFhDo0Ttu7qp_NusCSxSLGXd_UIBsWJyy08k9tF52gj8-ieDOvRQlHxiQxUKQw">
+</div>
+<h1 class="text-display font-display text-on-background tracking-tight max-w-4xl mx-auto">
+                    Automate your <span class="text-primary">WhatsApp Marketing.</span>
+</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    The ultimate Business API platform for high-performance communication. Scale your reach, engage customers, and expand your business with automated momentum.
+                </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-md pt-base">
+<a href="../expendmore_login/code.php" class="btn-primary px-8 py-4 rounded-xl text-on-primary font-bold text-body-md flex items-center gap-xs w-full sm:w-auto justify-center">
+                        Get Started <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+<button class="border border-tertiary-container text-tertiary px-8 py-4 rounded-xl font-bold text-body-md hover:bg-tertiary-container/10 transition-colors w-full sm:w-auto justify-center">
+                        Watch Demo
+                    </button>
+</div>
+<div class="pt-xl grid grid-cols-2 md:grid-cols-4 gap-md opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+<div class="flex items-center gap-xs justify-center"><span class="material-symbols-outlined">verified</span> Trusted by 500+ Brands</div>
+<div class="flex items-center gap-xs justify-center"><span class="material-symbols-outlined">bolt</span> Real-time Sync</div>
+<div class="flex items-center gap-xs justify-center"><span class="material-symbols-outlined">encrypted</span> AES-256 Secure</div>
+<div class="flex items-center gap-xs justify-center"><span class="material-symbols-outlined">api</span> Full API Access</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Features -->
+<section class="py-xl px-margin-mobile md:px-margin-desktop bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto space-y-xl">
+<div class="flex flex-col md:flex-row justify-between items-end gap-md">
+<div>
+<span class="text-primary text-label-sm font-label-sm tracking-widest uppercase">Platform Power</span>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mt-base">Built for Scale and Automation</h2>
+</div>
+<p class="text-on-surface-variant max-w-md text-body-md">
+                        Our three-pillar strategy ensures your marketing doesn't just reach people—it drives conversion and loyalty.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Feature: Automation -->
+<div class="md:col-span-8 glass-card p-xl rounded-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-md opacity-20 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[120px] text-primary">auto_mode</span>
+</div>
+<div class="relative z-10 space-y-md">
+<div class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">automation</span>
+</div>
+<h3 class="text-headline-md font-headline-md">Intelligent Automation</h3>
+<p class="text-on-surface-variant text-body-md max-w-lg">
+                                Create complex workflow nodes that trigger based on user behavior. From abandoned cart recovery to 24/7 customer support, our logic engine handles the momentum.
+                            </p>
+<div class="flex gap-sm">
+<span class="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-label-sm">Webhooks</span>
+<span class="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-label-sm">Auto-responders</span>
+<span class="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-label-sm">Conditional Flows</span>
+</div>
+</div>
+</div>
+<!-- Feature: Engagement -->
+<div class="md:col-span-4 glass-card p-xl rounded-xl space-y-md bg-gradient-to-br from-surface-container-high to-surface-container">
+<div class="w-12 h-12 rounded-lg bg-secondary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container">forum</span>
+</div>
+<h3 class="text-headline-md font-headline-md">High Engagement</h3>
+<p class="text-on-surface-variant text-body-md">
+                            Achieve 98% open rates with interactive message templates, quick-reply buttons, and multimedia broadcasts.
+                        </p>
+<div class="pt-base border-t border-outline-variant">
+<div class="flex items-center justify-between py-xs">
+<span class="text-label-sm">Open Rate</span>
+<span class="text-primary font-bold">98.2%</span>
+</div>
+<div class="w-full bg-outline-variant h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[98%]"></div>
+</div>
+</div>
+</div>
+<!-- Feature: Expansion -->
+<div class="md:col-span-4 glass-card p-xl rounded-xl space-y-md">
+<div class="w-12 h-12 rounded-lg bg-tertiary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary-container">trending_up</span>
+</div>
+<h3 class="text-headline-md font-headline-md">Viral Expansion</h3>
+<p class="text-on-surface-variant text-body-md">
+                            Use list management and segmentation tools to grow your audience exponentially through targeted campaigns.
+                        </p>
+</div>
+<!-- Feature: Analytics -->
+<div class="md:col-span-8 glass-card p-xl rounded-xl flex flex-col md:flex-row gap-lg items-center">
+<div class="flex-1 space-y-md">
+<h3 class="text-headline-md font-headline-md">Pro-Grade Analytics</h3>
+<p class="text-on-surface-variant text-body-md">
+                                Real-time reporting on delivery status, click-through rates, and coin consumption. Monitor your ROI with surgical precision.
+                            </p>
+<button class="text-primary font-bold flex items-center gap-xs">Explore Dashboard <span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+<div class="w-full md:w-64 h-40 bg-surface-container-high rounded-lg p-sm border border-outline-variant overflow-hidden">
+<div class="flex items-end gap-1 h-full">
+<div class="flex-1 bg-primary/20 hover:bg-primary transition-colors h-[40%] rounded-t-xs"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary transition-colors h-[60%] rounded-t-xs"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary transition-colors h-[55%] rounded-t-xs"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary transition-colors h-[85%] rounded-t-xs"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary transition-colors h-[45%] rounded-t-xs"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary transition-colors h-[90%] rounded-t-xs"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary transition-colors h-[70%] rounded-t-xs"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-xl px-margin-mobile md:px-margin-desktop overflow-hidden">
+<div class="max-w-5xl mx-auto glass-card rounded-2xl p-xl text-center relative">
+<div class="absolute -top-24 -left-24 w-64 h-64 bg-primary/10 rounded-full blur-[100px]"></div>
+<div class="absolute -bottom-24 -right-24 w-64 h-64 bg-secondary-container/10 rounded-full blur-[100px]"></div>
+<h2 class="text-display font-display text-on-surface mb-md">Ready to Expend More?</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-xl mx-auto mb-xl">
+                    Join thousands of businesses already scaling their marketing automation on WhatsApp. Start for free today.
+                </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-md">
+<a href="../expendmore_login/code.php" class="btn-primary px-12 py-4 rounded-xl text-on-primary font-bold text-headline-md w-full sm:w-auto flex items-center justify-center">
+                        Start Campaign
+                    </a>
+<div class="flex flex-col items-start gap-xs text-left">
+<span class="text-label-sm font-label-sm flex items-center gap-xs"><span class="material-symbols-outlined text-primary text-[16px]">check_circle</span> No credit card required</span>
+<span class="text-label-sm font-label-sm flex items-center gap-xs"><span class="material-symbols-outlined text-primary text-[16px]">check_circle</span> 1,250 free coins on signup</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-md w-full mt-auto bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant">
+<div class="flex flex-col gap-xs mb-md md:mb-0">
+<img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdSL_VzsGDUpkRQS2gLpPz4l2EV5vt6iuK9fB2fgNOwaBhfJGnq0SavbWj0w667UTg862DoNlUxGOsDgZQWiU8iEpyUtoTpkho0NBV9CPDrGTx5UcSTqSvxm1afL_Ut-m6lZUKRB7MuGDlmVnB1XHziJi8ToXkoBILoShLFmOTsoMMspb7E9Xc9IFhDo0Ttu7qp_NusCSxSLGXd_UIBsWJyy08k9tF52gj8-ieDOvRQlHxiQxUKQw" alt="ExpendMore Logo" class="h-8 w-auto">
+<p class="text-body-md font-body-md text-on-surface-variant opacity-80">© 2024 ExpendMore. All rights reserved.</p>
+</div>
+<div class="flex gap-lg">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-secondary-fixed transition-colors opacity-80 hover:opacity-100" href="#">Terms</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-secondary-fixed transition-colors opacity-80 hover:opacity-100" href="#">Privacy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-secondary-fixed transition-colors opacity-80 hover:opacity-100" href="#">API Docs</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-secondary-fixed transition-colors opacity-80 hover:opacity-100" href="#">Status</a>
+</div>
+<div class="flex gap-md mt-md md:mt-0">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all">language</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all">share</button>
+</div>
+</footer>
+<script>
+        // Micro-interaction for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mouseover', () => {
+                button.classList.add('scale-[1.02]');
+            });
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('scale-[1.02]');
+            });
+        });
+
+        // Simple scroll reveal for glass cards
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.classList.add('opacity-0', 'translate-y-10');
+            observer.observe(card);
+        });
+</script>
+</body></html>
